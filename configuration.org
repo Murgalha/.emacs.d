@@ -1,0 +1,339 @@
+#+TITLE: Emacs Configuration
+#+AUTHOR: Murilo Baldi
+#+EMAIL: murilobaldi@tutanota.com
+
+* Package Management
+** MELPA
+Adding MELPA to package archives to have more packages to download
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (add-to-list 'package-archives '("MELPA" . "https://melpa.org/packages/"))
+#+END_SRC
+
+** Use-Package
+I use =use-package= to manage and maintain all my packages updated.
+#+BEGIN_SRC emacs-lisp
+  ;; Install use-package if not installed
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+
+  (setq use-package-verbose t)
+  (setq use-package-always-ensure t)
+
+  ;; Load use-package
+  (eval-when-compile
+    (require 'use-package))
+#+END_SRC
+
+** Auto-Compile
+#+BEGIN_SRC emacs-lisp
+  (use-package auto-compile
+    :config (auto-compile-on-load-mode))
+  (setq load-prefer-newer t)
+#+END_SRC
+
+* UI
+** Theme
+I use Nord for basically everything in my life.
+#+BEGIN_SRC emacs-lisp
+  (use-package nord-theme
+    :config
+    (load-theme 'nord t))
+
+  ;; apply theme on emacsclient
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions
+                (lambda (frame)
+                  (with-selected-frame frame
+                    (load-theme 'nord t)))))
+#+END_SRC
+
+** Window-related
+#+BEGIN_SRC emacs-lisp
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  ;; Do not show startup screen
+  (setq inhibit-splash-screen t)
+#+END_SRC
+
+** Font
+I became a huge fan of Inconsolata and I like my text big, so...
+#+BEGIN_SRC emacs-lisp
+  ;; Setting font size
+  (add-to-list 'default-frame-alist '(font . "Inconsolata-20"))
+#+END_SRC
+
+** Display
+*** Cursor
+Disable cursor blink
+#+BEGIN_SRC emacs-lisp
+  (blink-cursor-mode 0)
+#+END_SRC
+*** Misc
+#+BEGIN_SRC emacs-lisp
+  (setq scroll-margin 0
+        scroll-conservatively 100000
+        scroll-preserve-screen-position 1)
+
+  (line-number-mode t)
+  (column-number-mode t)
+  ;; disable the annoying bell ring
+  (setq ring-bell-function 'ignore)
+
+  (use-package minions
+    :config (minions-mode 1))
+#+END_SRC
+
+* File management
+** Dired
+#+BEGIN_SRC emacs-lisp
+  (use-package dired-hide-dotfiles
+    :init
+    (add-hook 'dired-mode-hook (lambda ()
+                                 (dired-hide-dotfiles-mode)
+                                 (dired-hide-details-mode)))
+    :config
+    (define-key dired-mode-map "." #'dired-hide-dotfiles-mode))
+#+END_SRC
+
+** PDF reading
+#+BEGIN_SRC emacs-lisp
+  (use-package pdf-tools
+    :init
+    ;; Setting this as nil saves a lot of startup time
+    (setq pdf-view-use-unicode-ligther nil)
+    :config
+    (pdf-tools-install))
+#+END_SRC
+* Version control
+** =diff-hl=
+#+BEGIN_SRC emacs-lisp
+  (use-package diff-hl
+    :init
+    (global-diff-hl-mode)
+    (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
+    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+#+END_SRC
+
+** Magit
+#+BEGIN_SRC emacs-lisp
+  ;; Keybind to open magit
+  (use-package magit
+    :bind ("C-c g" . magit-status)
+    :config
+    (setq magit-emacsclient-executable "/usr/bin/em")
+    (setq git-commit-summary-max-length 50))
+#+END_SRC
+** Backup files
+#+BEGIN_SRC emacs-lisp
+  (setq auto-save-default nil)
+  ;; Set ~/.emacs.d/backups to store my backup files
+  (setq backup-directory-alist
+        `(("." . ,(concat user-emacs-directory "backups"))))
+
+  (setq backup-by-copying t)
+  ;; Keep some old backups
+  (setq delete-old-versions t
+        kept-new-versions 6
+        kept-old-versions 2
+        version-control t)
+#+END_SRC
+
+* Org Mode
+#+BEGIN_SRC emacs-lisp
+  ;; Insert timestamp when set DONE
+  (setq org-log-done t)
+  (add-hook 'org-mode-hook 'org-indent-mode)
+  ;; Enable Syntax highlighting and indentation on Org Babel
+  (setq org-src-fontify-natively t)
+  (setq org-src-tab-acts-natively t)
+
+  (use-package org-bullets
+    :init
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+#+END_SRC
+
+* Programming environments
+#+BEGIN_SRC emacs-lisp
+  (setq require-final-newline t)
+  ;; Show matching bracket
+  (show-paren-mode 1)
+  ;; Autoclose brackets
+  (electric-pair-mode 1)
+  ;;Setting 2 soft tabs
+  (setq-default indent-tabs-mode t)
+  (setq-default tab-width 4)
+  (setq indent-line-function 'insert-tab)
+  (setq backward-delete-char-untabify-method 'hungry)
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+#+END_SRC
+
+Activate =company-mode= globally and set completion to =M-/=.
+#+BEGIN_SRC emacs-lisp
+  (use-package company
+    :init
+    (add-hook 'after-init-hook 'global-company-mode)
+    (global-set-key (kbd "M-/") 'company-complete-common))
+#+END_SRC
+
+** Languages
+
+*** C/C++
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (setq c++-tab-always-indent t
+                    indent-tabs-mode t
+                    tab-width 4
+                    c-basic-offset tab-width
+                    c-indent-level tab-width)
+              (c-set-offset 'brace-list-intro 'c-basic-offset)
+              (c-set-offset 'substatement-open 0)))
+
+  (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+#+END_SRC
+
+*** C#
+Enable =Omnisharp= for C# programming
+#+BEGIN_SRC emacs-lisp
+  (use-package omnisharp
+    :init
+    (eval-after-load
+        'company
+      '(add-to-list 'company-backends 'company-omnisharp))
+    (add-hook 'csharp-mode-hook #'company-mode)
+    (add-hook 'csharp-mode-hook 'omnisharp-mode)
+    (add-hook 'csharp-mode-hook
+              (lambda ()
+                (setq indent-tabs-mode t)
+                (setq tab-width 4))))
+#+END_SRC
+
+*** GLSL
+#+BEGIN_SRC emacs-lisp
+  (use-package glsl-mode)
+#+END_SRC
+
+*** Javascript
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'js-mode
+            (lambda ()
+              (setq indent-tabs-mode nil)
+              (setq tab-width 2)
+              (setq js-indent-level 2)))
+#+END_SRC
+*** Markdown
+#+BEGIN_SRC emacs-lisp
+  (use-package markdown-mode
+    :ensure t
+    :mode (("README\\.md\\'" . gfm-mode)
+           ("\\.md\\'" . markdown-mode)
+           ("\\.markdown\\'" . markdown-mode))
+    :init (setq markdown-command "multimarkdown"))
+#+END_SRC
+
+*** Objective-C
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
+  (add-to-list 'magic-mode-alist
+               `(,(lambda ()
+                    (and (string= (file-name-extension buffer-file-name) "h")
+                         (re-search-forward "@\\<interface\\>"
+                                            magic-mode-regexp-match-limit t)))
+                 . objc-mode))
+#+END_SRC
+
+*** Python
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'python-mode
+            (lambda ()
+              (setq indent-tabs-mode nil)
+              (setq tab-width 4)
+              (setq python-indent-offset 4)))
+#+END_SRC
+
+*** Rjsx-Mode
+#+BEGIN_SRC emacs-lisp
+  (use-package rjsx-mode
+    :config
+    (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
+    (setq indent-tabs-mode nil)
+    (setq tab-width 2)
+    (setq js-indent-level 2))
+#+END_SRC
+
+*** Rust
+#+BEGIN_SRC emacs-lisp
+  (use-package rust-mode
+    :config
+    (add-hook 'rust-mode
+              (lambda ()
+                (setq indent-tabs-mode nil)
+                (setq tab-width 4))))
+#+END_SRC
+*** Web Development
+#+BEGIN_SRC emacs-lisp
+  ;; Set web-mode config
+  (use-package web-mode
+    :init
+    (add-hook 'web-mode-hook
+              (lambda ()
+                (setq tab-width 2)
+                (setq indent-tabs-mode nil)
+                (setq web-mode-markup-indent-offset 2)
+                (setq web-mode-css-indent-offset 2)
+                (setq web-mode-code-indent-offset 2)
+                (setq web-mode-enable-current-column-highlight t)
+                (setq web-mode-enable-current-element-highlight t)))
+
+    :mode
+    ("\\.phtml\\'" . web-mode)
+    ("\\.tpl\\.php\\'" . web-mode)
+    ("\\.[agj]sp\\'" . web-mode)
+    ("\\.as[cp]x\\'" . web-mode)
+    ("\\.erb\\'" . web-mode)
+    ("\\.mustache\\'" . web-mode)
+    ("\\.djhtml\\'" . web-mode)
+    ("\\.html?\\'" . web-mode))
+#+END_SRC
+
+**** Emmet
+#+BEGIN_SRC emacs-lisp
+  (use-package emmet-mode
+    :config
+    (add-hook 'web-mode-hook 'emmet-mode)
+    (add-hook 'sgml-mode-hook 'emmet-mode)
+    (add-hook 'css-mode-hook  'emmet-mode))
+#+END_SRC
+
+**** CSS
+Setting CSS indentation to 2
+#+BEGIN_SRC emacs-lisp
+  (setq indent-tabs-mode nil)
+  (setq css-indent-offset 2)
+#+END_SRC
+
+* Terminal related settings
+#+BEGIN_SRC emacs-lisp
+  ;; Set C-<backspace> to delete word backwards on terminal mode
+  (unless (display-graphic-p)
+    (global-set-key (kbd "C-h") 'backward-kill-word))
+#+END_SRC
+* Useful functions
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x k")
+                  (lambda ()
+                    (interactive)
+                    (kill-buffer (current-buffer))))
+#+END_SRC
+
+* Security
+** GPG
+Enable pinentry to prompt password on minibuffer
+#+BEGIN_SRC emacs-lisp
+  (use-package pinentry
+    :init
+    (pinentry-start))
+#+END_SRC
