@@ -59,10 +59,10 @@ I use Nord for basically everything in my life.
 #+END_SRC
 
 ** Font
-I became a huge fan of Inconsolata and I like my text big, so...
+I became a huge fan of Terminus and I like my text big, so...
 #+BEGIN_SRC emacs-lisp
   ;; Setting font size
-  (add-to-list 'default-frame-alist '(font . "Inconsolata-20"))
+  (add-to-list 'default-frame-alist '(font . "xos4 Terminus-20"))
 #+END_SRC
 
 ** Display
