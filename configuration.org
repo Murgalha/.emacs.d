@@ -33,10 +33,49 @@ I use =use-package= to manage and maintain all my packages updated.
   (setq load-prefer-newer t)
 #+END_SRC
 
-* UI
-** Theme
-I use Nord for basically everything in my life.
+* General
+** Startup
+Show time and garbage collection on minibuffer at startup.
+Copied this from [[https://zzamboni.org/post/my-emacs-configuration-with-commentary/][zzamboni's config]]
 #+BEGIN_SRC emacs-lisp
+  (add-hook 'emacs-startup-hook
+            (lambda ()
+              (message "Emacs ready in %s with %d garbage collections."
+                       (format "%.2f seconds"
+                               (float-time
+                                (time-subtract after-init-time before-init-time)))
+                       gcs-done)))
+#+END_SRC
+Trying to reduce startup time
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
+** Language
+UTF-8 everywhere
+#+BEGIN_SRC emacs-lisp
+  (set-language-environment "UTF-8")
+  (prefer-coding-system       'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (setq default-buffer-file-coding-system 'utf-8)
+#+END_SRC
+
+** Keybindings
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x k")
+                  (lambda ()
+                    (interactive)
+                    (kill-buffer (current-buffer))))
+  (global-set-key (kbd "s-o") 'other-window)
+#+END_SRC
+
+** Font and theme
+Currently using Terminus and Nord. Possibly the most unstable part of my config.
+#+BEGIN_SRC emacs-lisp
+  ;; Setting font size
+  (add-to-list 'default-frame-alist '(font . "xos4 Terminus-20"))
+
   (use-package nord-theme
     :config
     (load-theme 'nord t))
@@ -49,34 +88,23 @@ I use Nord for basically everything in my life.
                     (load-theme 'nord t)))))
 #+END_SRC
 
-** Window-related
+** Misc
 #+BEGIN_SRC emacs-lisp
   (menu-bar-mode -1)
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
   ;; Do not show startup screen
   (setq inhibit-splash-screen t)
-#+END_SRC
 
-** Font
-I became a huge fan of Terminus and I like my text big, so...
-#+BEGIN_SRC emacs-lisp
-  ;; Setting font size
-  (add-to-list 'default-frame-alist '(font . "xos4 Terminus-20"))
-#+END_SRC
-
-** Display
-*** Cursor
-Disable cursor blink
-#+BEGIN_SRC emacs-lisp
+  ;; no-blinking cursor
   (blink-cursor-mode 0)
-#+END_SRC
-*** Misc
-#+BEGIN_SRC emacs-lisp
+
+  ;; decent scrolling
   (setq scroll-margin 0
         scroll-conservatively 100000
         scroll-preserve-screen-position 1)
 
+  ;; show line and column numbers
   (line-number-mode t)
   (column-number-mode t)
   ;; disable the annoying bell ring
@@ -84,6 +112,45 @@ Disable cursor blink
 
   (use-package minions
     :config (minions-mode 1))
+
+#+END_SRC
+
+** PDF reading
+#+BEGIN_SRC emacs-lisp
+  (use-package pdf-tools
+    :init
+    ;; Setting this as nil saves a lot of startup time
+    (setq pdf-view-use-unicode-ligther nil)
+    :config
+    (pdf-tools-install))
+#+END_SRC
+
+* Org Mode
+#+BEGIN_SRC emacs-lisp
+  ;; Insert timestamp when set DONE
+  (require 'org)
+
+  (setq org-log-done t)
+  (add-hook 'org-mode-hook 'org-indent-mode)
+  ;; Enable Syntax highlighting and indentation on Org Babel
+  (setq org-src-fontify-natively t)
+  (setq org-src-tab-acts-natively t)
+
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (setq org-agenda-files '("~/org"))
+  (setq org-archive-location "~/org/history.org_archive::datetree/")
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "DOING(d)" "|" "DONE(D)" "CANCELED(c)")))
+
+  (setq org-todo-keyword-faces
+        '(("TODO" . "#ebcb8b")
+          ("DOING" . "#b48ead")
+          ("DONE" . "#a3be8c")
+          ("CANCELED" . "#bf616a")))
+
+  (use-package org-bullets
+    :init
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+END_SRC
 
 * =Ivy/Swiper=
@@ -112,9 +179,7 @@ Disable cursor blink
             (t . ivy-posframe-display-at-frame-center)))
     (ivy-posframe-mode 1))
 #+END_SRC
-
-* File management
-** Dired
+* Dired
 #+BEGIN_SRC emacs-lisp
   (setq gc-cons-threshold most-positive-fixnum)
   (use-package dired-hide-dotfiles
@@ -126,15 +191,6 @@ Disable cursor blink
     (define-key dired-mode-map "." #'dired-hide-dotfiles-mode))
 #+END_SRC
 
-** PDF reading
-#+BEGIN_SRC emacs-lisp
-  (use-package pdf-tools
-    :init
-    ;; Setting this as nil saves a lot of startup time
-    (setq pdf-view-use-unicode-ligther nil)
-    :config
-    (pdf-tools-install))
-#+END_SRC
 * Version control
 ** =diff-hl=
 #+BEGIN_SRC emacs-lisp
@@ -169,33 +225,7 @@ Disable cursor blink
         version-control t)
 #+END_SRC
 
-* Org Mode
-#+BEGIN_SRC emacs-lisp
-  ;; Insert timestamp when set DONE
-  (setq org-log-done t)
-  (add-hook 'org-mode-hook 'org-indent-mode)
-  ;; Enable Syntax highlighting and indentation on Org Babel
-  (setq org-src-fontify-natively t)
-  (setq org-src-tab-acts-natively t)
-
-  (global-set-key (kbd "C-c a") 'org-agenda)
-  (setq org-agenda-files '("~/org"))
-  (setq org-archive-location "~/org/history.org_archive::datetree/")
-  (setq org-todo-keywords
-        '((sequence "TODO(t)" "DOING(d)" "|" "DONE(D)" "CANCELED(c)")))
-
-  (setq org-todo-keyword-faces
-        '(("TODO" . "#ebcb8b")
-          ("DOING" . "#b48ead")
-          ("DONE" . "#a3be8c")
-          ("CANCELED" . "#bf616a")))
-
-  (use-package org-bullets
-    :init
-    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-#+END_SRC
-
-* Programming environments
+* Text manipulation
 #+BEGIN_SRC emacs-lisp
   (setq require-final-newline t)
   ;; Show matching bracket
@@ -218,8 +248,7 @@ Activate =company-mode= globally and set completion to =M-/=.
     (global-set-key (kbd "M-/") 'company-complete-common))
 #+END_SRC
 
-** Languages
-
+** Programming
 *** C/C++
 #+BEGIN_SRC emacs-lisp
   (add-hook 'c-mode-common-hook
@@ -353,20 +382,6 @@ Setting CSS indentation to 2
 #+BEGIN_SRC emacs-lisp
   (setq indent-tabs-mode nil)
   (setq css-indent-offset 2)
-#+END_SRC
-
-* Terminal related settings
-#+BEGIN_SRC emacs-lisp
-  ;; Set C-<backspace> to delete word backwards on terminal mode
-  (unless (display-graphic-p)
-    (global-set-key (kbd "C-h") 'backward-kill-word))
-#+END_SRC
-* Useful functions
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-x k")
-                  (lambda ()
-                    (interactive)
-                    (kill-buffer (current-buffer))))
 #+END_SRC
 
 * Security
