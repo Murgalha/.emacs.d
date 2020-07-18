@@ -46,10 +46,7 @@ Copied this from [[https://zzamboni.org/post/my-emacs-configuration-with-comment
                                 (time-subtract after-init-time before-init-time)))
                        gcs-done)))
 #+END_SRC
-Trying to reduce startup time
-#+BEGIN_SRC emacs-lisp
 
-#+END_SRC
 ** Language
 UTF-8 everywhere
 #+BEGIN_SRC emacs-lisp
@@ -181,7 +178,6 @@ Currently using Terminus and Nord. Possibly the most unstable part of my config.
 #+END_SRC
 * Dired
 #+BEGIN_SRC emacs-lisp
-  (setq gc-cons-threshold most-positive-fixnum)
   (use-package dired-hide-dotfiles
     :init
     (add-hook 'dired-mode-hook (lambda ()
