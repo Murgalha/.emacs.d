@@ -68,11 +68,11 @@ UTF-8 everywhere
 #+END_SRC
 
 ** Font and theme
-Currently using Terminus and Nord. Possibly the most unstable part of my config.
+Currently using Hack and Nord. Possibly the most unstable part of my config.
 #+BEGIN_SRC emacs-lisp
   ;; Setting font size
-  (setq font-family "xos4 Terminus")
-  (setq font-size "20")
+  (setq font-family "Hack")
+  (setq font-size "18")
 
   (add-to-list 'default-frame-alist
                (cons 'font (concat font-family "-" font-size)))
