@@ -63,12 +63,19 @@ UTF-8 everywhere
   (setq default-buffer-file-coding-system 'utf-8)
 #+END_SRC
 
-** Keybindings
+** Keybindings and functions
 #+BEGIN_SRC emacs-lisp
+  (defun mb/kill-line-backwards ()
+    (interactive)
+    (kill-line 0))
+
   (global-set-key (kbd "C-x k")
                   (lambda ()
                     (interactive)
                     (kill-buffer (current-buffer))))
+
+  (global-set-key (kbd "M-k") 'mb/kill-line-backwards)
+
   (global-set-key (kbd "s-o") 'other-window)
 #+END_SRC
 
