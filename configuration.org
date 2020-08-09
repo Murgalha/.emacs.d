@@ -34,6 +34,11 @@ I use =use-package= to manage and maintain all my packages updated.
 #+END_SRC
 
 * General
+** About me
+#+BEGIN_SRC emacs-lisp
+  (setq user-full-name "Murilo Baldi"
+        user-mail-address "murilobaldi@tutanota.com")
+#+END_SRC
 ** Startup
 Show time and garbage collection on minibuffer at startup.
 Copied this from [[https://zzamboni.org/post/my-emacs-configuration-with-commentary/][zzamboni's config]]
