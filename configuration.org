@@ -399,6 +399,30 @@ Setting CSS indentation to 2
   (setq css-indent-offset 2)
 #+END_SRC
 
+** =autoinsert=
+I use autoinsert to insert a simple header in my org files.
+Got the basic config from [[https://emacs.stackexchange.com/questions/45629/template-for-new-file][this post]].
+#+BEGIN_SRC emacs-lisp
+  (defun mb/write-org-header ()
+    (let* ((filename-sans-extension (file-name-base (buffer-file-name)))
+           (org-title (string-join
+                       (split-string filename-sans-extension "-") " ")))
+      (insert (format "#+TITLE: %s\n" (capitalize org-title)))
+      (insert (format "#+AUTHOR: %s\n" user-full-name))
+      (insert (format "#+EMAIL: %s\n\n" user-mail-address))))
+
+  (use-package autoinsert
+    :ensure nil
+    :config
+    ;; Avoid prompting for insertion
+    (setq auto-insert-query nil)
+    ;; reset the alist and use it with org files only,
+    ;; then set the hook
+    (setq auto-insert-alist nil)
+    (add-to-list 'auto-insert-alist  '("\\.org$" . mb/write-org-header)))
+  (add-hook 'find-file-hook 'auto-insert)
+#+END_SRC
+
 * Security
 ** GPG
 Enable pinentry to prompt password on minibuffer
