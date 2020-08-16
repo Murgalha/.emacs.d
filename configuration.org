@@ -80,10 +80,10 @@ UTF-8 everywhere
 #+END_SRC
 
 ** Font and theme
-Currently using Hack and Nord. Possibly the most unstable part of my config.
+Currently using JetBrains Mono and Modus Vivendi. Possibly the most unstable part of my config.
 #+BEGIN_SRC emacs-lisp
   ;; Setting font size
-  (setq font-family "Hack")
+  (setq font-family "JetBrains Mono")
   (setq font-size "18")
 
   (add-to-list 'default-frame-alist
@@ -92,16 +92,9 @@ Currently using Hack and Nord. Possibly the most unstable part of my config.
   (custom-set-faces
    '(fixed-pitch ((t (:family font-family)))))
 
-  (use-package nord-theme
+  (use-package modus-vivendi-theme
     :config
-    (load-theme 'nord t))
-
-  ;; apply theme on emacsclient
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions
-                (lambda (frame)
-                  (with-selected-frame frame
-                    (load-theme 'nord t)))))
+    (load-theme 'modus-vivendi t))
 #+END_SRC
 
 ** Misc
