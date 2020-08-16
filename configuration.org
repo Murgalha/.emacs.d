@@ -412,7 +412,8 @@ Got the basic config from [[https://emacs.stackexchange.com/questions/45629/temp
     ;; reset the alist and use it with org files only,
     ;; then set the hook
     (setq auto-insert-alist nil)
-    (add-to-list 'auto-insert-alist  '("\\.org$" . mb/write-org-header)))
+    (add-to-list 'auto-insert-alist  '("\\.org$" . mb/write-org-header))
+    (add-to-list 'auto-insert-alist  '("\\.h$" . mb/write-dot-h)))
   (add-hook 'find-file-hook 'auto-insert)
 #+END_SRC
 
