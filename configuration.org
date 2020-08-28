@@ -238,11 +238,9 @@ Currently using JetBrains Mono and Modus Vivendi. Possibly the most unstable par
   (setq require-final-newline t)
   ;; Show matching bracket
   (show-paren-mode 1)
-  ;; Autoclose brackets
-  (electric-pair-mode 1)
   ;;Setting 2 soft tabs
-  (setq-default indent-tabs-mode t)
-  (setq-default tab-width 4)
+  (setq-default indent-tabs-mode nil)
+  (setq-default tab-width 2)
   (setq indent-line-function 'insert-tab)
   (setq backward-delete-char-untabify-method 'hungry)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
