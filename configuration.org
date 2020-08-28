@@ -402,6 +402,14 @@ Got the basic config from [[https://emacs.stackexchange.com/questions/45629/temp
       (insert (format "#+AUTHOR: %s\n" user-full-name))
       (insert (format "#+EMAIL: %s\n\n" user-mail-address))))
 
+  (defun mb/write-dot-h ()
+    "Writes header for .h files for C and C++."
+    (let* ((filename (file-name-base (buffer-file-name))))
+      (insert (format "#ifndef _%s_H_\n" (upcase filename)))
+      (insert (format "#define _%s_H_\n\n" (upcase filename)))
+      (insert "\n\n#endif\n")))
+
+
   (use-package autoinsert
     :ensure nil
     :config
