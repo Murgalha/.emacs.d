@@ -19,7 +19,7 @@ I use =use-package= to manage and maintain all my packages updated.
     (package-install 'use-package))
 
   (setq use-package-verbose t)
-  (setq use-package-always-ensure t)
+  (setq use-package-always-ensure nil)
 
   ;; Load use-package
   (eval-when-compile
@@ -29,6 +29,7 @@ I use =use-package= to manage and maintain all my packages updated.
 ** Auto-Compile
 #+BEGIN_SRC emacs-lisp
   (use-package auto-compile
+    :ensure t
     :config (auto-compile-on-load-mode))
   (setq load-prefer-newer t)
 #+END_SRC
@@ -93,6 +94,7 @@ Currently using JetBrains Mono and Modus Vivendi. Possibly the most unstable par
    '(fixed-pitch ((t (:family font-family)))))
 
   (use-package modus-vivendi-theme
+    :ensure t
     :config
     (load-theme 'modus-vivendi t))
 #+END_SRC
@@ -120,13 +122,14 @@ Currently using JetBrains Mono and Modus Vivendi. Possibly the most unstable par
   (setq ring-bell-function 'ignore)
 
   (use-package minions
+    :ensure t
     :config (minions-mode 1))
-
 #+END_SRC
 
 ** PDF reading
 #+BEGIN_SRC emacs-lisp
   (use-package pdf-tools
+    :ensure t
     :init
     ;; Setting this as nil saves a lot of startup time
     (setq pdf-view-use-unicode-ligther nil)
@@ -158,14 +161,17 @@ Currently using JetBrains Mono and Modus Vivendi. Possibly the most unstable par
           ("CANCELED" . "#bf616a")))
 
   (use-package org-bullets
+    :ensure t
     :init
     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+END_SRC
 
 * =Ivy/Swiper=
 #+BEGIN_SRC emacs-lisp
-  (use-package counsel)
+  (use-package counsel
+    :ensure t)
   (use-package ivy
+    :ensure t
     :after counsel
     :config
     (ivy-mode 1)
@@ -181,6 +187,7 @@ Currently using JetBrains Mono and Modus Vivendi. Possibly the most unstable par
 ** Ivy Posframe
 #+BEGIN_SRC emacs-lisp
   (use-package ivy-posframe
+    :ensure t
     :config
     (setq ivy-posframe-display-functions-alist
           '((swiper . nil)
@@ -191,6 +198,7 @@ Currently using JetBrains Mono and Modus Vivendi. Possibly the most unstable par
 * Dired
 #+BEGIN_SRC emacs-lisp
   (use-package dired-hide-dotfiles
+    :ensure t
     :init
     (add-hook 'dired-mode-hook (lambda ()
                                  (dired-hide-dotfiles-mode)
@@ -203,6 +211,7 @@ Currently using JetBrains Mono and Modus Vivendi. Possibly the most unstable par
 ** =diff-hl=
 #+BEGIN_SRC emacs-lisp
   (use-package diff-hl
+    :ensure t
     :init
     (global-diff-hl-mode)
     (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
@@ -213,6 +222,7 @@ Currently using JetBrains Mono and Modus Vivendi. Possibly the most unstable par
 #+BEGIN_SRC emacs-lisp
   ;; Keybind to open magit
   (use-package magit
+    :ensure t
     :bind ("C-c g" . magit-status)
     :config
     (setq magit-emacsclient-executable "/usr/bin/em")
@@ -249,6 +259,7 @@ Currently using JetBrains Mono and Modus Vivendi. Possibly the most unstable par
 Activate =company-mode= globally and set completion to =M-/=.
 #+BEGIN_SRC emacs-lisp
   (use-package company
+    :ensure t
     :init
     (add-hook 'after-init-hook 'global-company-mode)
     (global-set-key (kbd "M-/") 'company-complete-common))
@@ -274,6 +285,7 @@ Activate =company-mode= globally and set completion to =M-/=.
 Enable =Omnisharp= for C# programming
 #+BEGIN_SRC emacs-lisp
   (use-package omnisharp
+    :ensure t
     :init
     (eval-after-load
         'company
@@ -288,7 +300,8 @@ Enable =Omnisharp= for C# programming
 
 *** GLSL
 #+BEGIN_SRC emacs-lisp
-  (use-package glsl-mode)
+  (use-package glsl-mode
+    :ensure t)
 #+END_SRC
 
 *** Javascript
@@ -332,6 +345,7 @@ Enable =Omnisharp= for C# programming
 *** Rjsx-Mode
 #+BEGIN_SRC emacs-lisp
   (use-package rjsx-mode
+    :ensure t
     :config
     (add-to-list 'auto-mode-alist '("components\\/.*\\.js\\'" . rjsx-mode))
     (setq indent-tabs-mode nil)
@@ -342,6 +356,7 @@ Enable =Omnisharp= for C# programming
 *** Rust
 #+BEGIN_SRC emacs-lisp
   (use-package rust-mode
+    :ensure t
     :config
     (add-hook 'rust-mode
               (lambda ()
@@ -352,6 +367,7 @@ Enable =Omnisharp= for C# programming
 #+BEGIN_SRC emacs-lisp
   ;; Set web-mode config
   (use-package web-mode
+    :ensure t
     :init
     (add-hook 'web-mode-hook
               (lambda ()
@@ -377,6 +393,7 @@ Enable =Omnisharp= for C# programming
 **** Emmet
 #+BEGIN_SRC emacs-lisp
   (use-package emmet-mode
+    :ensure t
     :config
     (add-hook 'web-mode-hook 'emmet-mode)
     (add-hook 'sgml-mode-hook 'emmet-mode)
@@ -411,7 +428,6 @@ Got the basic config from [[https://emacs.stackexchange.com/questions/45629/temp
 
 
   (use-package autoinsert
-    :ensure nil
     :config
     ;; Avoid prompting for insertion
     (setq auto-insert-query nil)
@@ -428,6 +444,7 @@ Got the basic config from [[https://emacs.stackexchange.com/questions/45629/temp
 Enable pinentry to prompt password on minibuffer
 #+BEGIN_SRC emacs-lisp
   (use-package pinentry
+    :ensure t
     :init
     (pinentry-start))
 #+END_SRC
