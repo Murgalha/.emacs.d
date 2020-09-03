@@ -126,6 +126,13 @@ Currently using JetBrains Mono and Modus Vivendi. Possibly the most unstable par
     :config (minions-mode 1))
 #+END_SRC
 
+I find the default mouse wheel scrolling a bit weird, so I change that to avoid
+acceleration and set a lower number of line amount to scroll.
+#+BEGIN_SRC emacs-lisp
+  (setq mouse-wheel-progressive-speed nil)
+  (setq mouse-wheel-scroll-amount '(3 ((shift) . 5) ((control) . nil)))
+#+END_SRC
+
 ** PDF reading
 #+BEGIN_SRC emacs-lisp
   (use-package pdf-tools
