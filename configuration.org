@@ -66,16 +66,55 @@ UTF-8 everywhere
 
 ** Keybindings and functions
 #+BEGIN_SRC emacs-lisp
-  (defun mb/kill-line-backwards ()
+  (defun mb/kill-line-backward ()
+    "Kill line from cursor to beginning of line."
     (interactive)
-    (kill-line 0))
+    (delete-region
+     (point)
+     (progn
+       (beginning-of-line 1)
+       (point))))
+
+  (defun mb/kill-line ()
+    "Kill line from cursor to end of line. If cursor is in the beginning
+    of line, leave no empty line (remove \n also)."
+    (interactive)
+    (delete-region
+     (point)
+     (progn
+       (end-of-line 1)
+       (point)))
+    (if (bolp)
+        (delete-char 1)))
+
+  (defun mb/kill-nwords (n)
+    "Kill following N words. If argument is negative, kill backward."
+    (delete-region
+     (point)
+     (progn
+       (forward-word n)
+       (point))))
+
+  (defun mb/kill-word-backward ()
+    (interactive)
+    (mb/kill-nwords -1))
+
+  (defun mb/kill-word-forward ()
+    (interactive)
+    (mb/kill-nwords 1))
 
   (global-set-key (kbd "C-x k")
                   (lambda ()
                     (interactive)
                     (kill-buffer (current-buffer))))
 
-  (global-set-key (kbd "M-k") 'mb/kill-line-backwards)
+  (global-set-key (kbd "C-<backspace>") 'mb/kill-word-backward)
+  (global-set-key (kbd "M-d") 'mb/kill-word-forward)
+  (global-set-key (kbd "M-k") 'mb/kill-line-backward)
+
+  ;; Overwrite org-kill-line with my own
+  (defalias 'org-kill-line 'mb/kill-line)
+  (global-set-key (kbd "C-k") 'mb/kill-line)
 
   (global-set-key (kbd "s-o") 'other-window)
 #+END_SRC
