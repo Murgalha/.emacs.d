@@ -352,7 +352,7 @@ Enable =Omnisharp= for C# programming
 
 *** Javascript
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'js-mode
+  (add-hook 'js-mode-hook
             (lambda ()
               (setq indent-tabs-mode nil
                     tab-width 2
