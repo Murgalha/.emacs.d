@@ -393,10 +393,10 @@ Enable =Omnisharp= for C# programming
   (use-package rust-mode
     :ensure t
     :config
-    (add-hook 'rust-mode
+    (add-hook 'rust-mode-hook
               (lambda ()
-                (setq indent-tabs-mode nil)
-                (setq tab-width 4))))
+                (setq indent-tabs-mode nil
+                      tab-width 4))))
 #+END_SRC
 *** Web Development
 #+BEGIN_SRC emacs-lisp
