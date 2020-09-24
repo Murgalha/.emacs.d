@@ -444,6 +444,22 @@ Setting CSS indentation to 2
           css-indent-offset 2))
 #+END_SRC
 
+**** Vuejs
+#+BEGIN_SRC emacs-lisp
+  (use-package vue-mode
+    :ensure t
+    :config
+    (set-face-background 'mmm-default-submode-face nil))
+#+END_SRC
+
+**** Typescript
+#+BEGIN_SRC emacs-lisp
+  (use-package typescript-mode
+    :ensure t
+    :config
+    (setq-default typescript-indent-level 2))
+#+END_SRC
+
 ** =autoinsert=
 I use autoinsert to insert a simple header in my org files.
 Got the basic config from [[https://emacs.stackexchange.com/questions/45629/template-for-new-file][this post]].
