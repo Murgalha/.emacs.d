@@ -230,17 +230,6 @@ acceleration and set a lower number of line amount to scroll.
      ("C-s" . swiper-isearch)))
 #+END_SRC
 
-** Ivy Posframe
-#+BEGIN_SRC emacs-lisp
-  (use-package ivy-posframe
-    :ensure t
-    :config
-    (setq ivy-posframe-display-functions-alist
-          '((swiper . nil)
-            (swiper-isearch . nil)
-            (t . ivy-posframe-display-at-frame-center)))
-    (ivy-posframe-mode 1))
-#+END_SRC
 * Dired
 #+BEGIN_SRC emacs-lisp
   (use-package dired-hide-dotfiles
