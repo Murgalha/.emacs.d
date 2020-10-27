@@ -337,10 +337,33 @@ Enable =Omnisharp= for C# programming
                       tab-width 4))))
 #+END_SRC
 
+*** GDScript
+#+BEGIN_SRC emacs-lisp
+  (use-package gdscript-mode
+    :ensure t
+    :config
+    (add-hook 'gdscript-mode-hook
+              (lambda ())
+              (setq gdscript-use-tab-indents t
+                    gdscript-tab-width 4
+                    gdscript-indent-offset 4)))
+#+END_SRC
+
 *** GLSL
 #+BEGIN_SRC emacs-lisp
   (use-package glsl-mode
     :ensure t)
+#+END_SRC
+
+*** Go
+#+BEGIN_SRC emacs-lisp
+  (use-package go-mode
+    :ensure t
+    :config
+    (add-hook 'go-mode-hook
+              (lambda ()
+                (setq indent-tabs-mode t
+                      tab-width 4))))
 #+END_SRC
 
 *** Javascript
