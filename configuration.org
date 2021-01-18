@@ -142,7 +142,7 @@ Currently using JetBrains Mono and Modus Vivendi. Possibly the most unstable par
   (custom-set-faces
    '(fixed-pitch ((t (:family font-family)))))
 
-  (use-package modus-vivendi-theme
+  (use-package modus-themes
     :ensure t
     :config
     (load-theme 'modus-vivendi t))
