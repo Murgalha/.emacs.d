@@ -301,6 +301,18 @@ acceleration and set a lower number of line amount to scroll.
         version-control t)
 #+END_SRC
 
+* Projects
+** Projectile
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :ensure t
+    :config
+    (projectile-mode +1)
+    (projectile-global-mode)
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+    (setq projectile-project-search-path '("~/projects/")))
+#+END_SRC
+
 * Text manipulation
 #+BEGIN_SRC emacs-lisp
   (setq require-final-newline t)
