@@ -75,6 +75,9 @@ UTF-8 everywhere
 #+END_SRC
 
 ** Keybindings and functions
+*** Custom functions
+Some general purpose functions I use, such as deleting text
+without putting it in the kill-ring.
 #+BEGIN_SRC emacs-lisp
   (defun mb/kill-line-backward ()
     "Kill line from cursor to beginning of line."
@@ -127,6 +130,16 @@ UTF-8 everywhere
   (global-set-key (kbd "C-k") 'mb/kill-line)
 
   (global-set-key (kbd "s-o") 'other-window)
+#+END_SRC
+
+*** =which-key=
+Which-key is extremely helpful when you forgot the exact binding
+or want to view the possibilities of a certain prefix.
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :ensure t
+    :config
+    (which-key-mode))
 #+END_SRC
 
 ** Font and theme
