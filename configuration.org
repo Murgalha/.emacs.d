@@ -254,13 +254,34 @@ acceleration and set a lower number of line amount to scroll.
 #+END_SRC
 
 * Dired
+I use dired a lot, so I like it with as many useful features
+as possible, such as colorful output, git info and others.
 #+BEGIN_SRC emacs-lisp
+  (use-package dired
+    :config
+    ;; Set human output on dired
+    (setq dired-listing-switches "-alh"))
+
+  ;; More colored output for dired
+  (use-package diredfl
+    :ensure t
+    :config
+    (diredfl-global-mode +1))
+
+  ;; Show git info in front of the files
+  ;; Example:
+  ;; File x <last commit message> <commit date>
+  (use-package dired-git-info
+    :ensure t
+    :bind (:map dired-mode-map
+                (")" . dired-git-info-mode)))
+
+  ;; Hide dotfiles and toggle them with "."
   (use-package dired-hide-dotfiles
     :ensure t
     :init
     (add-hook 'dired-mode-hook (lambda ()
-                                 (dired-hide-dotfiles-mode)
-                                 (dired-hide-details-mode)))
+                                 (dired-hide-dotfiles-mode)))
     :config
     (define-key dired-mode-map "." #'dired-hide-dotfiles-mode))
 #+END_SRC
