@@ -54,6 +54,10 @@ I use =use-package= to manage and maintain all my packages updated.
 Show time and garbage collection on minibuffer at startup.
 Copied this from [[https://zzamboni.org/post/my-emacs-configuration-with-commentary/][zzamboni's config]]
 #+BEGIN_SRC emacs-lisp
+  ;; Start frames already maximized
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+  ;; Nice message after startup
   (add-hook 'emacs-startup-hook
             (lambda ()
               (message "Emacs ready in %s with %d garbage collections."
