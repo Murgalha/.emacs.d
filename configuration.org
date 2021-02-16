@@ -372,6 +372,7 @@ Enable =Omnisharp= for C# programming
 #+BEGIN_SRC emacs-lisp
   (use-package omnisharp
     :ensure t
+    :defer t
     :init
     (eval-after-load
         'company
@@ -388,6 +389,7 @@ Enable =Omnisharp= for C# programming
 #+BEGIN_SRC emacs-lisp
   (use-package gdscript-mode
     :ensure t
+    :defer t
     :config
     (add-hook 'gdscript-mode-hook
               (lambda ())
@@ -399,6 +401,7 @@ Enable =Omnisharp= for C# programming
 *** GLSL
 #+BEGIN_SRC emacs-lisp
   (use-package glsl-mode
+    :defer t
     :ensure t)
 #+END_SRC
 
@@ -406,6 +409,7 @@ Enable =Omnisharp= for C# programming
 #+BEGIN_SRC emacs-lisp
   (use-package go-mode
     :ensure t
+    :defer t
     :config
     (add-hook 'go-mode-hook
               (lambda ()
@@ -425,6 +429,7 @@ Enable =Omnisharp= for C# programming
 #+BEGIN_SRC emacs-lisp
   (use-package markdown-mode
     :ensure t
+    :defer t
     :mode (("README\\.md\\'" . gfm-mode)
            ("\\.md\\'" . markdown-mode)
            ("\\.markdown\\'" . markdown-mode))
@@ -444,17 +449,21 @@ Enable =Omnisharp= for C# programming
 
 *** Python
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'python-mode
-            (lambda ()
-              (setq indent-tabs-mode nil
-                    tab-width 4
-                    python-indent-offset 4)))
+  (use-package python-mode
+    :defer t
+    :config
+    (add-hook 'python-mode
+              (lambda ()
+                (setq indent-tabs-mode nil
+                      tab-width 4
+                      python-indent-offset 4))))
 #+END_SRC
 
 *** Rust
 #+BEGIN_SRC emacs-lisp
   (use-package rust-mode
     :ensure t
+    :defer t
     :config
     (add-hook 'rust-mode-hook
               (lambda ()
@@ -466,6 +475,7 @@ Enable =Omnisharp= for C# programming
   ;; Set web-mode config
   (use-package web-mode
     :ensure t
+    :defer t
     :init
     (add-hook 'web-mode-hook
               (lambda ()
@@ -492,6 +502,8 @@ Enable =Omnisharp= for C# programming
 #+BEGIN_SRC emacs-lisp
   (use-package emmet-mode
     :ensure t
+    :after web-mode
+    :defer t
     :config
     (add-hook 'web-mode-hook 'emmet-mode)
     (add-hook 'sgml-mode-hook 'emmet-mode)
@@ -502,6 +514,7 @@ Enable =Omnisharp= for C# programming
 Setting CSS indentation to 2
 #+BEGIN_SRC emacs-lisp
   (use-package css-mode
+    :defer t
     :config
     (setq indent-tabs-mode nil
           css-indent-offset 2))
@@ -510,6 +523,7 @@ Setting CSS indentation to 2
 **** Vuejs
 #+BEGIN_SRC emacs-lisp
   (use-package vue-mode
+    :defer t
     :ensure t
     :config
     (set-face-background 'mmm-default-submode-face nil))
@@ -519,6 +533,7 @@ Setting CSS indentation to 2
 #+BEGIN_SRC emacs-lisp
   (use-package typescript-mode
     :ensure t
+    :defer t
     :config
     (setq-default typescript-indent-level 2))
 #+END_SRC
