@@ -351,15 +351,6 @@ as possible, such as colorful output, git info and others.
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+END_SRC
 
-Activate =company-mode= globally and set completion to =M-/=.
-#+BEGIN_SRC emacs-lisp
-  (use-package company
-    :ensure t
-    :init
-    (add-hook 'after-init-hook 'global-company-mode)
-    (global-set-key (kbd "M-/") 'company-complete-common))
-#+END_SRC
-
 ** Programming
 *** C/C++
 #+BEGIN_SRC emacs-lisp
