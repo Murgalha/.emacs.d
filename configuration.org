@@ -66,6 +66,18 @@ Copied this from [[https://zzamboni.org/post/my-emacs-configuration-with-comment
                                 (time-subtract after-init-time before-init-time)))
                        gcs-done)))
 #+END_SRC
+** Elisp
+Loading my custom elisp files located at =~/.emacs.d/elisp/=.
+#+BEGIN_SRC emacs-lisp
+    (setq custom-elisp-dir
+          (concat (file-name-as-directory user-emacs-directory)
+                  (concat (file-name-as-directory "elisp"))))
+  (defun load-custom-elisp (dir)
+    (mapc 'load-file
+          (directory-files-recursively dir ".el$")))
+  ;; Loading files
+  (load-custom-elisp custom-elisp-dir)
+#+END_SRC
 
 ** Language
 UTF-8 everywhere
