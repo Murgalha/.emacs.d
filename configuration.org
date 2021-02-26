@@ -286,6 +286,7 @@ as possible, such as colorful output, git info and others.
   ;; More colored output for dired
   (use-package diredfl
     :ensure t
+    :after dired
     :config
     (diredfl-global-mode +1))
 
@@ -294,12 +295,14 @@ as possible, such as colorful output, git info and others.
   ;; File x <last commit message> <commit date>
   (use-package dired-git-info
     :ensure t
+    :after dired
     :bind (:map dired-mode-map
                 (")" . dired-git-info-mode)))
 
   ;; Hide dotfiles and toggle them with "."
   (use-package dired-hide-dotfiles
     :ensure t
+    :after dired
     :init
     (add-hook 'dired-mode-hook (lambda ()
                                  (dired-hide-dotfiles-mode)))
