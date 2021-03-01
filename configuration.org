@@ -210,6 +210,9 @@ Currently using JetBrains Mono and Modus Vivendi. Possibly the most unstable par
   ;; disable the annoying bell ring
   (setq ring-bell-function 'ignore)
 
+  ;; Move deleted stuff to trash
+  (setq delete-by-moving-to-trash t)
+
   (use-package diminish
     :ensure t)
 #+END_SRC
