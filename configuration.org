@@ -71,6 +71,11 @@ Setting the default directory to home to fix some weird behavior on Linux
   (setq default-directory (file-name-as-directory (getenv "HOME")))
 #+END_SRC
 
+Removing those annoying 'yes/no' questions
+#+BEGIN_SRC emacs-lisp
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
 ** Elisp
 Loading my custom elisp files located at =~/.emacs.d/elisp/=.
 #+BEGIN_SRC emacs-lisp
