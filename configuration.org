@@ -264,7 +264,10 @@ acceleration and set a lower number of line amount to scroll.
     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+END_SRC
 
-* =Ivy/Swiper=
+* Completion Framework
+** Ivy/Counsel
+I currently use Ivy and Counsel because the UI is very clean and
+the functionalities they provide are incredible.
 #+BEGIN_SRC emacs-lisp
   (use-package counsel
     :ensure t
@@ -281,6 +284,15 @@ acceleration and set a lower number of line amount to scroll.
     (setq ivy-use-virtual-buffers t)
     (setq enable-recursive-minibuffers t)
     (setq ivy-count-format "(%d/%d) "))
+#+END_SRC
+** CTRLF
+I find swiper not that useful because the results are shown
+piled together in a weird way. CTRLF feels like an extended ISearch
+#+BEGIN_SRC emacs-lisp
+  (use-package ctrlf
+    :ensure t
+    :config
+    (ctrlf-mode +1))
 #+END_SRC
 
 * Dired
