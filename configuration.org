@@ -380,7 +380,7 @@ as possible, such as colorful output, git info and others.
     (setq projectile-project-search-path '("~/projects/")))
 #+END_SRC
 
-* Text manipulation
+* Text editing
 #+BEGIN_SRC emacs-lisp
   (setq require-final-newline t)
   ;; Show matching bracket
