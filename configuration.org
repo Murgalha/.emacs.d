@@ -275,12 +275,14 @@ the functionalities they provide are incredible.
 #+BEGIN_SRC emacs-lisp
   (use-package counsel
     :ensure t
+    :demand
     :bind
     (("M-x" . counsel-M-x)
      ("C-x C-f" . counsel-find-file)))
 
   (use-package ivy
     :ensure t
+    :demand
     :after counsel
     :diminish ivy-mode
     :config
@@ -376,11 +378,13 @@ as possible, such as colorful output, git info and others.
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
     :ensure t
+    :after (:all ivy counsel)
     :diminish projectile-mode
     :config
     (projectile-mode +1)
     (projectile-global-mode)
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+    (setq projectile-completion-system 'ivy)
     (setq projectile-project-search-path '("~/projects/")))
 #+END_SRC
 
