@@ -85,7 +85,11 @@ Loading my custom elisp files located at =~/.emacs.d/elisp/=.
   (defun load-custom-elisp (dir)
     (mapc 'load-file
           (directory-files-recursively dir ".el$")))
-  ;; Loading files
+  ;; Create elisp dir if it does not exist
+  (when (not (file-directory-p custom-elisp-dir))
+    (make-directory custom-elisp-dir t))
+
+  ;; load elisp inside custom dir
   (load-custom-elisp custom-elisp-dir)
 #+END_SRC
 
