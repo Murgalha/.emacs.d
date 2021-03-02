@@ -385,10 +385,7 @@ as possible, such as colorful output, git info and others.
   (setq require-final-newline t)
   ;; Show matching bracket
   (show-paren-mode 1)
-  ;; Auto-close brackets
-  (electric-pair-mode 1)
-  (setq-default electric-pair-preserve-balance nil)
-  (setq-default electric-pair-skip-whitespace nil)
+
   ;;Setting 2 soft tabs
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 2)
