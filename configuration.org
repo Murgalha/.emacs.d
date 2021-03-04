@@ -219,6 +219,14 @@ Currently using JetBrains Mono and Modus Vivendi. Possibly the most unstable par
 
   (use-package diminish
     :ensure t)
+
+  (use-package hl-todo
+    :hook (prog-mode . hl-todo-mode)
+    :ensure t
+    :config
+    (setq hl-todo-keyword-faces
+          '(("TODO" . "#FF0000")
+            ("NOTE" . "#00FF00"))))
 #+END_SRC
 
 I find the default mouse wheel scrolling a bit weird, so I change that to avoid
