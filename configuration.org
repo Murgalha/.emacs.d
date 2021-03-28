@@ -316,7 +316,7 @@ as possible, such as colorful output, git info and others.
   (use-package dired
     :config
     ;; Set human output on dired
-    (setq dired-listing-switches "-alh"))
+    (setq dired-listing-switches "-alh --group-directories-first"))
 
   ;; More colored output for dired
   (use-package diredfl
