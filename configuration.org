@@ -595,6 +595,14 @@ Setting CSS indentation to 2
     :config
     (setq-default typescript-indent-level 2))
 #+END_SRC
+*** Zig
+#+BEGIN_SRC emacs-lisp
+  (use-package zig-mode
+    :ensure t
+    :defer t
+    :config
+    (setq zig-return-to-buffer-after-format t))
+#+END_SRC
 
 ** =autoinsert=
 I use autoinsert to insert a simple header in my org files.
