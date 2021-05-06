@@ -265,10 +265,10 @@ acceleration and set a lower number of line amount to scroll.
         '((sequence "TODO(t)" "DOING(d)" "|" "DONE(D)" "CANCELED(c)")))
 
   (setq org-todo-keyword-faces
-        '(("TODO" . "#ebcb8b")
-          ("DOING" . "#b48ead")
-          ("DONE" . "#a3be8c")
-          ("CANCELED" . "#bf616a")))
+        '(("TODO" . "dark orange")
+          ("DOING" . "medium orchid")
+          ("DONE" . "lime green")
+          ("CANCELED" . "firebrick1")))
 
   (use-package org-bullets
     :ensure t
