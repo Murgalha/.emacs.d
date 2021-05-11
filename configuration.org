@@ -1,6 +1,6 @@
 #+TITLE: Emacs Configuration
 #+AUTHOR: Murilo Baldi
-#+EMAIL: murilobaldi@tutanota.com
+#+EMAIL: mb@murilobaldi.com
 
 * Package Management
 ** MELPA
@@ -48,7 +48,7 @@ I use =use-package= to manage and maintain all my packages updated.
 ** About me
 #+BEGIN_SRC emacs-lisp
   (setq user-full-name "Murilo Baldi"
-        user-mail-address "murilobaldi@tutanota.com")
+        user-mail-address "mb@murilobaldi.com")
 #+END_SRC
 ** Startup
 Show time and garbage collection on minibuffer at startup.
