@@ -168,7 +168,6 @@ or want to view the possibilities of a certain prefix.
 #+BEGIN_SRC emacs-lisp
   (use-package which-key
     :ensure t
-    :diminish which-key-mode
     :config
     (which-key-mode))
 #+END_SRC
@@ -217,8 +216,10 @@ Currently using JetBrains Mono and Modus Vivendi. Possibly the most unstable par
   ;; Move deleted stuff to trash
   (setq delete-by-moving-to-trash t)
 
-  (use-package diminish
-    :ensure t)
+  (use-package minions
+    :ensure t
+    :config
+    (minions-mode +1))
 
   (use-package hl-todo
     :hook (prog-mode . hl-todo-mode)
@@ -385,7 +386,6 @@ as possible, such as colorful output, git info and others.
   (use-package projectile
     :ensure t
     :after selectrum
-    :diminish projectile-mode
     :config
     (projectile-mode +1)
     (projectile-global-mode)
