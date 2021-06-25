@@ -173,10 +173,10 @@ or want to view the possibilities of a certain prefix.
 #+END_SRC
 
 ** Font and theme
-Currently using JetBrains Mono and Modus Vivendi. Possibly the most unstable part of my config.
+Currently using Iosevka and Modus Vivendi. Possibly the most unstable part of my config.
 #+BEGIN_SRC emacs-lisp
   ;; Setting font size
-  (setq font-family "JetBrains Mono")
+  (setq font-family "Iosevka Custom")
   (setq font-size "18")
 
   (add-to-list 'default-frame-alist
@@ -188,6 +188,8 @@ Currently using JetBrains Mono and Modus Vivendi. Possibly the most unstable par
   (use-package modus-themes
     :ensure t
     :config
+    (setq modus-themes-mode-line 'accented-3d
+          modus-themes-syntax 'yellow-comments)
     (load-theme 'modus-vivendi t))
 #+END_SRC
 
