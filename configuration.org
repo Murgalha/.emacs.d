@@ -34,16 +34,6 @@ I use =use-package= to manage and maintain all my packages updated.
   (setq load-prefer-newer t)
 #+END_SRC
 
-** Auto Update
-#+BEGIN_SRC emacs-lisp
-  (use-package auto-package-update
-    :ensure t
-    :config
-    (setq auto-package-update-interval 5
-          auto-package-update-delete-old-versions t))
-  (auto-package-update-maybe)
-#+END_SRC
-
 * General
 ** About me
 #+BEGIN_SRC emacs-lisp
