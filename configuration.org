@@ -413,6 +413,19 @@ as possible, such as colorful output, git info and others.
 #+END_SRC
 
 ** Programming
+*** Snippets
+Yasnippet is pretty solid.
+#+BEGIN_SRC emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :config
+    (setq yas-snippet-dirs '("~/.emacs.d/snippets/"))
+    ;; remove default keys and define Ctrl+Tab for expansion
+    (define-key yas-minor-mode-map (kbd "<tab>") nil)
+    (define-key yas-minor-mode-map (kbd "TAB") nil)
+    (define-key yas-minor-mode-map (kbd "C-<tab>") #'yas-expand)
+    (yas-global-mode 1))
+#+END_SRC
 *** C/C++
 #+BEGIN_SRC emacs-lisp
   (add-hook 'c-mode-common-hook
@@ -620,14 +633,6 @@ Got the basic config from [[https://emacs.stackexchange.com/questions/45629/temp
       (insert (format "#+AUTHOR: %s\n" user-full-name))
       (insert (format "#+EMAIL: %s\n\n" user-mail-address))))
 
-  (defun mb/write-dot-h ()
-    "Writes header for .h files for C and C++."
-    (let* ((filename (file-name-base (buffer-file-name))))
-      (insert (format "#ifndef _%s_H_\n" (upcase filename)))
-      (insert (format "#define _%s_H_\n\n" (upcase filename)))
-      (insert "\n\n#endif\n")))
-
-
   (use-package autoinsert
     :config
     ;; Avoid prompting for insertion
@@ -636,8 +641,7 @@ Got the basic config from [[https://emacs.stackexchange.com/questions/45629/temp
     ;; then set the hook
     (setq auto-insert-alist nil)
     (add-to-list 'auto-insert-alist  '("\\.org$" . mb/write-org-header))
-    (add-to-list 'auto-insert-alist  '("\\.h$" . mb/write-dot-h)))
-  (add-hook 'find-file-hook 'auto-insert)
+    (add-hook 'find-file-hook 'auto-insert))
 #+END_SRC
 
 * Security
