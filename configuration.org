@@ -220,6 +220,10 @@ Currently using Iosevka and Modus Vivendi. Possibly the most unstable part of my
     (setq hl-todo-keyword-faces
           '(("TODO" . "#FF0000")
             ("NOTE" . "#00FF00"))))
+
+  ;; Automatic buffer revert with outside changes
+  (global-auto-revert-mode 1)
+  (setq global-auto-revert-non-file-buffers t)
 #+END_SRC
 
 I find the default mouse wheel scrolling a bit weird, so I change that to avoid
