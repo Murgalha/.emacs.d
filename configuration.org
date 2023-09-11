@@ -224,6 +224,9 @@ Currently using Iosevka and Modus Vivendi. Possibly the most unstable part of my
   ;; Automatic buffer revert with outside changes
   (global-auto-revert-mode 1)
   (setq global-auto-revert-non-file-buffers t)
+
+  ;; Decent beahvior on selection mode
+  (delete-selection-mode)
 #+END_SRC
 
 I find the default mouse wheel scrolling a bit weird, so I change that to avoid
