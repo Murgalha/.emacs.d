@@ -178,9 +178,14 @@ Currently using Berkeley Mono and Modus Vivendi. Possibly the most unstable part
   (use-package modus-themes
     :ensure t
     :config
-    (setq modus-themes-mode-line 'accented-3d
-          modus-themes-syntax 'yellow-comments)
-    (load-theme 'modus-vivendi t))
+    (setq modus-themes-common-palette-overrides
+          '((border-mode-line-active unspecified)
+            (border-mode-line-inactive unspecified)
+            (fg-mode-line-active fg-main)))
+    (load-theme 'modus-vivendi-tinted t)
+    (set-face-attribute 'fringe nil
+                        :foreground (face-foreground 'default)
+                        :background (face-background 'default)))
 #+END_SRC
 
 ** Misc
