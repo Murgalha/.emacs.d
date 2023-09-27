@@ -257,6 +257,11 @@ acceleration and set a lower number of line amount to scroll.
   ;; Insert timestamp when set DONE
   (require 'org)
 
+  (use-package org-contacts
+    :ensure t
+    :config
+    (setq org-contacts-files '("~/org/wiki/contacts.org")))
+
   (setq org-log-done t)
   (add-hook 'org-mode-hook 'org-indent-mode)
   ;; Enable Syntax highlighting and indentation on Org Babel
