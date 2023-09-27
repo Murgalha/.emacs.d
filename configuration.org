@@ -417,10 +417,10 @@ as possible, such as colorful output, git info and others.
   (add-hook 'text-mode-hook 'hl-line-mode)
   (add-hook 'prog-mode-hook 'hl-line-mode)
 
-  ;;Setting 2 soft tabs
-  (setq-default indent-tabs-mode nil)
-  (setq-default tab-width 2)
-  (setq indent-line-function 'insert-tab)
+  ;;Setting 4 hard tabs
+  (setq-default indent-tabs-mode t)
+  (setq-default tab-width 4)
+  (setq indent-line-function 'complete)
   (setq backward-delete-char-untabify-method 'hungry)
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
 #+END_SRC
