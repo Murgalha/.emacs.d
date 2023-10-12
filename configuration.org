@@ -232,6 +232,9 @@ Currently using Berkeley Mono and Modus Vivendi. Possibly the most unstable part
 
   ;; Decent beahvior on selection mode
   (delete-selection-mode)
+
+  ;; display a visual hint where the file ends
+  (setq-default indicate-empty-lines t)
 #+END_SRC
 
 I find the default mouse wheel scrolling a bit weird, so I change that to avoid
