@@ -380,9 +380,10 @@ as possible, such as colorful output, git info and others.
 ** Backup files
 #+BEGIN_SRC emacs-lisp
   (setq auto-save-default nil)
-  ;; Set ~/.emacs.d/backups to store my backup files
+
+  ;; Set ~/.emacs.d/backup to store my backup files
   (setq backup-directory-alist
-        `(("." . ,(concat user-emacs-directory "backups"))))
+        `(("." . ,(concat user-emacs-directory "backup"))))
 
   (setq backup-by-copying t)
   ;; Keep some old backups
