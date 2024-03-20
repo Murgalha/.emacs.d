@@ -563,6 +563,15 @@ Enable =Omnisharp= for C# programming
                       python-indent-offset 4))))
 #+END_SRC
 
+*** Ruby
+#+BEGIN_SRC emacs-lisp
+  (use-package ruby-mode
+    :config
+    (add-hook 'ruby-mode-hook
+              (lambda () (setq indent-tabs-mode nil
+                               ruby-indent-level 4))))
+#+END_SRC
+
 *** Rust
 #+BEGIN_SRC emacs-lisp
   (use-package rust-mode
