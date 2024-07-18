@@ -235,6 +235,19 @@ Currently using Berkeley Mono and Modus Vivendi. Possibly the most unstable part
 
   ;; display a visual hint where the file ends
   (setq-default indicate-empty-lines t)
+
+  (defun mb/disable-themes ()
+    (interactive)
+    (mapc #'disable-theme custom-enabled-themes))
+
+  (defun mb/load-theme ()
+    (interactive)
+    (let ((selected-theme (completing-read "Select theme: " (custom-available-themes))))
+      (mb/disable-themes)
+      (load-theme (intern selected-theme) :no-confirm)
+  	(set-face-attribute 'fringe nil
+                          :foreground (face-foreground 'default)
+                          :background (face-background 'default))))
 #+END_SRC
 
 I find the default mouse wheel scrolling a bit weird, so I change that to avoid
