@@ -433,10 +433,6 @@ as possible, such as colorful output, git info and others.
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
   (setq-default display-line-numbers-width 3)
 
-  ;; Highlight current line in some modes
-  (add-hook 'text-mode-hook 'hl-line-mode)
-  (add-hook 'prog-mode-hook 'hl-line-mode)
-
   ;;Setting 4 hard tabs
   (setq-default indent-tabs-mode t)
   (setq-default tab-width 4)
