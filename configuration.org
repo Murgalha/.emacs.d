@@ -414,7 +414,7 @@ as possible, such as colorful output, git info and others.
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
     :ensure t
-    :after selectrum
+    :demand
     :config
     (projectile-mode +1)
     (projectile-global-mode)
@@ -425,7 +425,14 @@ as possible, such as colorful output, git info and others.
 
 * Text editing
 #+BEGIN_SRC emacs-lisp
+  (use-package move-text
+    :ensure t
+    :config
+    (global-set-key (kbd "M-p") 'move-text-up)
+    (global-set-key (kbd "M-n") 'move-text-down))
+
   (setq require-final-newline t)
+
   ;; Show matching bracket
   (show-paren-mode 1)
 
