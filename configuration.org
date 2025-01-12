@@ -436,10 +436,6 @@ as possible, such as colorful output, git info and others.
   ;; Show matching bracket
   (show-paren-mode 1)
 
-  ;; Display line numbers
-  (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-  (setq-default display-line-numbers-width 3)
-
   ;;Setting 4 hard tabs
   (setq-default indent-tabs-mode t)
   (setq-default tab-width 4)
