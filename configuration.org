@@ -551,17 +551,6 @@ Enable =Omnisharp= for C# programming
     :init (setq markdown-command "multimarkdown"))
 #+END_SRC
 
-*** Objective-C
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.mm\\'" . objc-mode))
-  (add-to-list 'magic-mode-alist
-               `(,(lambda ()
-                    (and (string= (file-name-extension buffer-file-name) "h")
-                         (re-search-forward "@\\<interface\\>"
-                                            magic-mode-regexp-match-limit t)))
-                 . objc-mode))
-#+END_SRC
-
 *** Python
 #+BEGIN_SRC emacs-lisp
   (use-package python-mode
