@@ -40,6 +40,7 @@ I use =use-package= to manage and maintain all my packages updated.
   (setq user-full-name "Murilo Baldi"
         user-mail-address "mb@murilobaldi.com")
 #+END_SRC
+
 ** Startup
 Show time and garbage collection on minibuffer at startup.
 Copied this from [[https://zzamboni.org/post/my-emacs-configuration-with-commentary/][zzamboni's config]]
@@ -389,6 +390,7 @@ as possible, such as colorful output, git info and others.
     (setq magit-emacsclient-executable "/usr/bin/em")
     (setq git-commit-summary-max-length 50))
 #+END_SRC
+
 ** Backup files
 #+BEGIN_SRC emacs-lisp
   (setq auto-save-default nil)
@@ -506,10 +508,10 @@ Enable =Omnisharp= for C# programming
     :defer t
     :config
     (add-hook 'gdscript-mode-hook
-              (lambda ())
-              (setq gdscript-use-tab-indents t
-                    gdscript-tab-width 4
-                    gdscript-indent-offset 4)))
+              (lambda ()
+                (setq gdscript-use-tab-indents t
+  					gdscript-tab-width 4
+  					gdscript-indent-offset 4))))
 #+END_SRC
 
 *** GLSL
@@ -540,6 +542,7 @@ Enable =Omnisharp= for C# programming
                     tab-width 2
                     js-indent-level tab-width)))
 #+END_SRC
+
 *** Markdown
 #+BEGIN_SRC emacs-lisp
   (use-package markdown-mode
@@ -583,6 +586,7 @@ Enable =Omnisharp= for C# programming
                 (setq indent-tabs-mode nil
                       tab-width 4))))
 #+END_SRC
+
 *** Web Development
 #+BEGIN_SRC emacs-lisp
   ;; Set web-mode config
@@ -650,6 +654,7 @@ Setting CSS indentation to 2
     :config
     (setq-default typescript-indent-level 2))
 #+END_SRC
+
 *** Zig
 #+BEGIN_SRC emacs-lisp
   (use-package zig-mode
