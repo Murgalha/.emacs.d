@@ -163,7 +163,7 @@ or want to view the possibilities of a certain prefix.
 #+END_SRC
 
 ** Font and theme
-Currently using Berkeley Mono and Modus Vivendi. Possibly the most unstable part of my config.
+Currently using PragmataPro Mono and Modus Vivendi. Possibly the most unstable part of my config.
 #+BEGIN_SRC emacs-lisp
   ;; Setting font size
   (setq font-family "PragmataPro Mono")
