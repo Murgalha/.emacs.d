@@ -19,7 +19,7 @@ I use =use-package= to manage and maintain all my packages updated.
     (package-install 'use-package))
 
   (setq use-package-verbose t)
-  (setq use-package-always-ensure nil)
+  (setq use-package-always-ensure t)
 
   ;; Load use-package
   (eval-when-compile
@@ -338,6 +338,7 @@ I use dired a lot, so I like it with as many useful features
 as possible, such as colorful output, git info and others.
 #+BEGIN_SRC emacs-lisp
   (use-package dired
+    :ensure nil
     :config
     ;; Set human output on dired
     (setq dired-listing-switches "-alh --group-directories-first"))
