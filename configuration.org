@@ -196,8 +196,9 @@ Currently using PragmataPro Mono and Modus Vivendi. Possibly the most unstable p
   ;; Do not show startup screen
   (setq inhibit-splash-screen t)
 
-  ;; no-blinking cursor
-  (blink-cursor-mode 0)
+  ;; blinking cursor
+  (blink-cursor-mode 1)
+  (setq-default  cursor-type '(bar . 3))
 
   ;; decent scrolling
   (setq scroll-margin 0
