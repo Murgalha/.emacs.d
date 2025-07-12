@@ -455,6 +455,16 @@ as possible, such as colorful output, git info and others.
 #+END_SRC
 
 ** Programming
+*** Jump to definition
+#+begin_src emacs-lisp
+  (use-package dumb-jump
+    :ensure t
+    :init
+    (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+    :config
+    (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
+#+end_src
+
 *** Snippets
 Yasnippet is pretty solid.
 #+BEGIN_SRC emacs-lisp
