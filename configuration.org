@@ -67,6 +67,13 @@ Removing those annoying 'yes/no' questions
   (defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
+When using =emacsclient=, focus on the client frame when it opens. Otherwise I have
+to manually switch focus.
+Saving the command here in case I ever forget or lose the script
+#+begin_src emacs-lisp
+  ;; emacsclient --create-frame --alternate-editor="" --eval "(select-frame-set-input-focus (selected-frame))"
+#+end_src
+
 ** Elisp
 Loading my custom elisp files located at =~/.emacs.d/elisp/=.
 #+BEGIN_SRC emacs-lisp
