@@ -508,21 +508,10 @@ Yasnippet is pretty solid.
 #+END_SRC
 
 *** C#
-Enable =Omnisharp= for C# programming
+C# works pretty well with eglot and omnisharp as the backend. We also set some modes for common files on dotnet projects.
 #+BEGIN_SRC emacs-lisp
-  (use-package omnisharp
-    :ensure t
-    :defer t
-    :init
-    (eval-after-load
-        'company
-      '(add-to-list 'company-backends 'company-omnisharp))
-    (add-hook 'csharp-mode-hook #'company-mode)
-    (add-hook 'csharp-mode-hook 'omnisharp-mode)
-    (add-hook 'csharp-mode-hook
-              (lambda ()
-                (setq indent-tabs-mode t
-                      tab-width 4))))
+(add-to-list 'auto-mode-alist '("\\.csproj\\'" . nxml-mode))
+
 #+END_SRC
 
 *** GDScript
