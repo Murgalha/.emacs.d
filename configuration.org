@@ -501,6 +501,31 @@ Yasnippet is pretty solid.
     (add-hook 'prog-mode-hook #'flycheck-mode))
 #+END_SRC
 
+*** Autocompletion
+#+begin_src emacs-lisp
+  (use-package company
+    :ensure t
+    :init
+    (add-hook 'after-init-hook 'global-company-mode))
+#+end_src
+
+*** Auto formatting
+#+begin_src emacs-lisp
+  (use-package format-all
+    :commands format-all-mode
+    :hook (prog-mode . format-all-mode)
+    :config
+    (define-format-all-formatter fixed-csharpier
+  	(:executable "csharpier")
+  	(:install "dotnet install -g csharpier")
+  	(:languages "C#")
+  	(:features)
+  	(:format (format-all--buffer-easy executable "format" "--write-stdout")))
+
+    (setq-default format-all-formatters
+                  '(("C#"     (fixed-csharpier)))))
+#+end_src
+
 *** C/C++
 #+BEGIN_SRC emacs-lisp
   (add-hook 'c-mode-common-hook
