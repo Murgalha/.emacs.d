@@ -484,6 +484,15 @@ Yasnippet is pretty solid.
     (yas-global-mode 1))
 #+END_SRC
 
+*** Language servers
+=eglot= is a pretty decent package and it's builtin, which makes it even better.
+#+begin_src emacs-lisp
+  (use-package eglot
+    :ensure nil
+    :defer t
+    :hook (csharp-mode . eglot-ensure))
+#+end_src
+
 *** Grammar
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
@@ -510,7 +519,7 @@ Yasnippet is pretty solid.
 *** C#
 C# works pretty well with eglot and omnisharp as the backend. We also set some modes for common files on dotnet projects.
 #+BEGIN_SRC emacs-lisp
-(add-to-list 'auto-mode-alist '("\\.csproj\\'" . nxml-mode))
+  (add-to-list 'auto-mode-alist '("\\.csproj\\'" . nxml-mode))
 
 #+END_SRC
 
