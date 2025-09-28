@@ -490,7 +490,8 @@ Yasnippet is pretty solid.
   (use-package eglot
     :ensure nil
     :defer t
-    :hook (csharp-mode . eglot-ensure))
+    :hook ((csharp-mode . eglot-ensure)
+  		 (ruby-mode . eglot-ensure)))
 #+end_src
 
 *** Grammar
@@ -523,7 +524,8 @@ Yasnippet is pretty solid.
   	(:format (format-all--buffer-easy executable "format" "--write-stdout")))
 
     (setq-default format-all-formatters
-                  '(("C#"     (fixed-csharpier)))))
+                  '(("C#"     (fixed-csharpier))
+  				  ("Ruby"     (rubocop)))))
 #+end_src
 
 *** C/C++
